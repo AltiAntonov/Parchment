@@ -31,6 +31,7 @@ open class PagingTitleCell: PagingCell {
       viewModel = PagingTitleCellViewModel(
         title: titleItem.title,
         selected: selected,
+        color: titleItem.titleColor,
         options: options)
     }
     configureTitleLabel()
@@ -49,32 +50,11 @@ open class PagingTitleCell: PagingCell {
     guard let viewModel = viewModel else { return }
     titleLabel.text = viewModel.title
     titleLabel.textAlignment = .center
-    
-    if viewModel.selected {
-      titleLabel.font = viewModel.selectedFont
-      titleLabel.textColor = viewModel.selectedTextColor
-      backgroundColor = viewModel.selectedBackgroundColor
-    } else {
-      titleLabel.font = viewModel.font
-      titleLabel.textColor = viewModel.textColor
-      backgroundColor = viewModel.backgroundColor
-    }
+    titleLabel.textColor = viewModel.titleColor
   }
   
   open override func apply(_ layoutAttributes: UICollectionViewLayoutAttributes) {
     super.apply(layoutAttributes)
     guard let viewModel = viewModel else { return }
-    if let attributes = layoutAttributes as? PagingCellLayoutAttributes {
-      titleLabel.textColor = UIColor.interpolate(
-        from: viewModel.textColor,
-        to: viewModel.selectedTextColor,
-        with: attributes.progress)
-      
-      backgroundColor = UIColor.interpolate(
-        from: viewModel.backgroundColor,
-        to: viewModel.selectedBackgroundColor,
-        with: attributes.progress)
-    }
   }
-  
 }

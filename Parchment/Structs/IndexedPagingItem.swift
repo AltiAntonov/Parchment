@@ -12,18 +12,20 @@ public struct PagingIndexItem: PagingTitleItem, Equatable, Hashable, Comparable 
   /// The title used in the menu cells.
   public let title: String
   
+  public let titleColor: UIColor
+  
+    public var hashValue: Int {
+    return index
+  }
+  
   /// Creates an instance of `PagingIndexItem`
   ///
   /// Parameter index: The index of the `PagingItem`.
   /// Parameter title: The title used in the menu cells.
-  public init(index: Int, title: String) {
+    public init(index: Int, title: String, color: UIColor = UIColor.white) {
     self.title = title
     self.index = index
-  }
-  
-  public func hash(into hasher: inout Hasher) {
-    hasher.combine(index)
-    hasher.combine(title)
+    self.titleColor = color
   }
   
   public static func ==(lhs: PagingIndexItem, rhs: PagingIndexItem) -> Bool {

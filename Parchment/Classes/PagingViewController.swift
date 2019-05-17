@@ -1026,10 +1026,11 @@ open class PagingViewController<T: PagingItem>:
   // MARK: UICollectionViewDataSource
   
   open func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PagingCellReuseIdentifier, for: indexPath) as! PagingCell
+    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PagingCellReuseIdentifier, for: indexPath) as! PagingTitleCell
     let pagingItem = visibleItems.items[indexPath.item]
     let selected = state.currentPagingItem == pagingItem
     cell.setPagingItem(pagingItem, selected: selected, options: options)
+    cell.titleLabel.tintColor = (pagingItem as! PagingTitleItem).titleColor
     return cell
   }
   

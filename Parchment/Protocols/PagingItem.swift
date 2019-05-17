@@ -11,4 +11,5 @@ public protocol PagingItem {}
 /// store a title that is going to be display in the menu items.
 public protocol PagingTitleItem: PagingItem {
   var title: String { get }
+  var titleColor: UIColor { get }
 }
